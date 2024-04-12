@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:ATAS.Tracker.ViewModels"
+             x:Class="ATAS.Tracker.Views.TaskListView"
+             x:DataType="vm:TaskListViewModel">
+
+	<ListBox Items="{Binding Tasks}"
+             SelectedItem="{Binding SelectedTask}"
+             ScrollViewer.VerticalScrollBarVisibility="Auto">
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<TextBlock Text="{Binding Title}"/>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+</UserControl>
