@@ -3,14 +3,43 @@
              xmlns:vm="using:ATAS.Tracker.ViewModels"
              x:Class="ATAS.Tracker.Views.TaskListView"
              x:DataType="vm:TaskListViewModel">
+	<Design.DataContext>
+		<vm:TaskListViewModel/>
+	</Design.DataContext>
 
-	<ListBox Items="{Binding Tasks}"
-             SelectedItem="{Binding SelectedTask}"
-             ScrollViewer.VerticalScrollBarVisibility="Auto">
-		<ListBox.ItemTemplate>
-			<DataTemplate>
-				<TextBlock Text="{Binding Title}"/>
-			</DataTemplate>
-		</ListBox.ItemTemplate>
-	</ListBox>
+	<Panel Margin="20">
+		<ListBox Name="QuestionsListBox" Background="Transparent" FontWeight="Bold" ItemsSource="{Binding Tasks}" Margin="80,-20,0,0">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border BorderBrush="Blue" BorderThickness="3" Margin="0,5" CornerRadius="20">
+						<StackPanel Width="200" Margin="5">
+							<TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+							<TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+							<StackPanel Orientation="Horizontal" Margin="0,5">
+								<TextBlock Text="Created: "/>
+								<TextBlock Text="{Binding CreatedDate}"/>
+							</StackPanel>
+							<TextBlock Text="{Binding Status}" Foreground="{Binding Status}"/>
+							<StackPanel Orientation="Horizontal" Margin="0,5">
+								<TextBlock Text="Completion Date: "/>
+								<TextBlock Text="{Binding CompletionDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+							</StackPanel>
+						</StackPanel>
+					</Border>
+
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+
+		</ListBox>
+	</Panel>
+
+
+
+
 </UserControl>

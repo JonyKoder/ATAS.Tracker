@@ -3,8 +3,10 @@
         xmlns:vm="using:ATAS.Tracker.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:local="using:ATAS.Tracker.Views"
         x:Class="ATAS.Tracker.Views.MainWindow"
+		Width="1700"
+		Height="900"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ATAS.Tracker">
@@ -13,8 +15,34 @@
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 
-	<Grid>
-		<!-- Your task list view here -->
-		<TaskListView/>
-	</Grid>
+	<Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+
+		<Grid VerticalAlignment="Top" HorizontalAlignment="Center" ShowGridLines="True">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50" />
+				<RowDefinition Height="Auto" />
+				
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.Row="0" Spacing="10" Orientation="Horizontal" Margin="10">
+				<Button Command="{Binding CreateTask}" Background="Green" Content="Добавить задачу"  />
+				<Button Command="{Binding EditTask}" Background="Yellow" Content="Редактировать задачу" />
+				<Button Command="{Binding DeleteTask}" Background="Red" Content="Удалить задачу"/>
+			</StackPanel>
+			<WrapPanel Background="Gainsboro" Width="1200" Height="800" Margin="10" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+				<local:TaskListView Margin="10" DataContext="{Binding TaskListViewModel}"/>
+			</WrapPanel>
+		</Grid>
+	</Panel>
+
+
 </Window>

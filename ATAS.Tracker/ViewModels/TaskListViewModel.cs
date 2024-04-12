@@ -1,26 +1,50 @@
 ﻿using ATAS.Tracker.Models;
+using ATAS.Tracker.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace ATAS.Tracker.ViewModels
+namespace ATAS.Tracker.ViewModels;
+public class TaskListViewModel : ViewModelBase, INotifyPropertyChanged
 {
-    public class TaskListViewModel : ViewModelBase
+    private ObservableCollection<TaskModel> tasks;
+    public ObservableCollection<TaskModel> Tasks
     {
-        public ObservableCollection<TaskModel> Tasks { get; set; }
-        public TaskModel SelectedTask { get; set; }
-
-        public TaskListViewModel()
+        get { return tasks; }
+        set
         {
-            // Initialize Tasks collection with sample data
-            Tasks = new ObservableCollection<TaskModel>
-            {
-                new TaskModel { Id = 1, Title = "Sample Task 1", Description = "Description 1", CreatedDate = DateTime.Now, Status = "In Progress" },
-                new TaskModel { Id = 2, Title = "Sample Task 2", Description = "Description 2", CreatedDate = DateTime.Now, Status = "Completed", CompletionDate = DateTime.Now }
-            };
+            tasks = value;
+            OnPropertyChanged(nameof(Tasks));
         }
+    }
+
+    private TaskModel selectedTask;
+    public TaskModel SelectedTask
+    {
+        get { return selectedTask; }
+        set
+        {
+            selectedTask = value;
+            OnPropertyChanged(nameof(SelectedTask));
+        }
+    }
+
+    public TaskListViewModel()
+    {   
+        // Инициализация коллекции Tasks примерными данными
+        Tasks = new ObservableCollection<TaskModel>
+        {
+            new TaskModel { Id = 1, Title = "Sample Task 1", Description = "Descridsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssption 1", CreatedDate = DateTime.Now, Status = "In Progress" },
+            new TaskModel { Id = 2, Title = "Sample Task 2", Description = "Description 2", CreatedDate = DateTime.Now, Status = "Completed", CompletionDate = DateTime.Now },
+            new TaskModel { Id = 3, Title = "Sample Task 1", Description = "Descridsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssption 1", CreatedDate = DateTime.Now, Status = "In Progress" },
+            new TaskModel { Id = 4, Title = "Sample Task 2", Description = "Description 2", CreatedDate = DateTime.Now, Status = "Completed", CompletionDate = DateTime.Now }
+        };
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
