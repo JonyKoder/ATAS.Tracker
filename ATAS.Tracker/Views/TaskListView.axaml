@@ -3,9 +3,6 @@
              xmlns:vm="using:ATAS.Tracker.ViewModels"
              x:Class="ATAS.Tracker.Views.TaskListView"
              x:DataType="vm:TaskListViewModel">
-	<Design.DataContext>
-		<vm:TaskListViewModel/>
-	</Design.DataContext>
 
 	<Panel Margin="20">
 		<ListBox Name="QuestionsListBox" Background="Transparent" FontWeight="Bold" ItemsSource="{Binding Tasks}" Margin="80,-20,0,0">

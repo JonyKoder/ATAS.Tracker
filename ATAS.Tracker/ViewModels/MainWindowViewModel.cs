@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using ATAS.Tracker.BL;
+using ATAS.Tracker.EF;
+using ReactiveUI;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -6,15 +8,12 @@ namespace ATAS.Tracker.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public ICommand CreateTask { get; }
-        public ICommand EditTask { get; }
-        public ICommand DeleteTask { get; }
-
+        private readonly ITaskService _taskService;
         public TaskListViewModel TaskListViewModel { get; set; }
-
-        public MainWindowViewModel()
+        public MainWindowViewModel(ITaskService taskService, TaskListViewModel taskListViewModel)
         {
-            TaskListViewModel = new TaskListViewModel();
+            _taskService = taskService;
+            TaskListViewModel = taskListViewModel;
             CreateTask =  ReactiveCommand.Create(async () =>
             {
                 await CreateTaskAsync();
@@ -30,6 +29,10 @@ namespace ATAS.Tracker.ViewModels
                 await DeleteTaskAsync();
             });
         }
+
+        public ICommand CreateTask { get; }
+        public ICommand EditTask { get; }
+        public ICommand DeleteTask { get; }
 
         private async Task CreateTaskAsync()
         {

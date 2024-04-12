@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATAS.Tracker", "ATAS.Tracker\ATAS.Tracker.csproj", "{1B927342-148B-4935-B164-5B1F13F182AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATAS.Tracker", "ATAS.Tracker\ATAS.Tracker.csproj", "{1B927342-148B-4935-B164-5B1F13F182AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4486280C-4849-4419-BB77-3F9DFAB5E28F} = {4486280C-4849-4419-BB77-3F9DFAB5E28F}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATAS.Tracker.BL", "ATAS.Tracker.BL\ATAS.Tracker.BL.csproj", "{DF9A5725-CD43-4C96-B605-A9C615B6645D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4486280C-4849-4419-BB77-3F9DFAB5E28F} = {4486280C-4849-4419-BB77-3F9DFAB5E28F}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATAS.Tracker.EF", "ATAS.Tracker.EF\ATAS.Tracker.EF.csproj", "{4486280C-4849-4419-BB77-3F9DFAB5E28F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,14 @@ Global
 		{1B927342-148B-4935-B164-5B1F13F182AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B927342-148B-4935-B164-5B1F13F182AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B927342-148B-4935-B164-5B1F13F182AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9A5725-CD43-4C96-B605-A9C615B6645D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9A5725-CD43-4C96-B605-A9C615B6645D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9A5725-CD43-4C96-B605-A9C615B6645D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9A5725-CD43-4C96-B605-A9C615B6645D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4486280C-4849-4419-BB77-3F9DFAB5E28F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4486280C-4849-4419-BB77-3F9DFAB5E28F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4486280C-4849-4419-BB77-3F9DFAB5E28F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4486280C-4849-4419-BB77-3F9DFAB5E28F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
