@@ -30,7 +30,7 @@ namespace ATAS.Tracker
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(service, vm),
+                    DataContext = new MainWindowViewModel(vm),
                 };
 
             }

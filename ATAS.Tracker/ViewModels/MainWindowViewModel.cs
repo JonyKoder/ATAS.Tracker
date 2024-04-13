@@ -1,6 +1,9 @@
 ﻿using ATAS.Tracker.BL;
 using ATAS.Tracker.EF;
+using ATAS.Tracker.Views;
+using DialogHostAvalonia;
 using ReactiveUI;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -8,16 +11,17 @@ namespace ATAS.Tracker.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private readonly ITaskService _taskService;
         public TaskListViewModel TaskListViewModel { get; set; }
-        public MainWindowViewModel(ITaskService taskService, TaskListViewModel taskListViewModel)
+
+        public MainWindowViewModel(TaskListViewModel taskListViewModel)
         {
-            _taskService = taskService;
             TaskListViewModel = taskListViewModel;
-            CreateTask =  ReactiveCommand.Create(async () =>
+            OpenTaskDialogCommand = ReactiveCommand.Create(() =>
             {
-                await CreateTaskAsync();
+                var dialog = new CreateTaskViewDialogViewModel();
+                DialogHost.Show(dialog, "CreateTaskDialog");
             });
+
 
             EditTask =  ReactiveCommand.Create(async () =>
             {
@@ -30,14 +34,9 @@ namespace ATAS.Tracker.ViewModels
             });
         }
 
-        public ICommand CreateTask { get; }
+        public ICommand OpenTaskDialogCommand { get; }
         public ICommand EditTask { get; }
         public ICommand DeleteTask { get; }
-
-        private async Task CreateTaskAsync()
-        {
-            // Ваша логика для создания задачи
-        }
 
         private async Task EditTaskAsync()
         {

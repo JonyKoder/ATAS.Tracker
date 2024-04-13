@@ -1,4 +1,5 @@
-﻿using ATAS.Tracker.Models;
+﻿using ATAS.Tracker.Dtos;
+using ATAS.Tracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace ATAS.Tracker.BL
     public interface ITaskService
     {
         List<TaskModel> GetTasks();
+        void CreateTask(TaskModelDto dto);
     }
 }

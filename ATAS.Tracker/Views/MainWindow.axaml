@@ -3,10 +3,12 @@
         xmlns:vm="using:ATAS.Tracker.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	    xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
         xmlns:local="using:ATAS.Tracker.Views"
         x:Class="ATAS.Tracker.Views.MainWindow"
 		Width="1700"
 		Height="900"
+		ExtendClientAreaToDecorationsHint="True"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ATAS.Tracker">
@@ -25,16 +27,16 @@
 					MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-
+	
 		<Grid VerticalAlignment="Top" HorizontalAlignment="Center" ShowGridLines="True">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="50" />
 				<RowDefinition Height="Auto" />
-				
-			</Grid.RowDefinitions>
 
+			</Grid.RowDefinitions>
+			
 			<StackPanel Grid.Row="0" Spacing="10" Orientation="Horizontal" Margin="10">
-				<Button Command="{Binding CreateTask}" Background="Green" Content="Добавить задачу"  />
+				<Button Command="{Binding OpenTaskDialogCommand}" Background="Green" Content="Добавить задачу"  />
 				<Button Command="{Binding EditTask}" Background="Yellow" Content="Редактировать задачу" />
 				<Button Command="{Binding DeleteTask}" Background="Red" Content="Удалить задачу"/>
 			</StackPanel>
@@ -42,7 +44,10 @@
 				<local:TaskListView Margin="10" DataContext="{Binding TaskListViewModel}"/>
 			</WrapPanel>
 		</Grid>
+		<!--Попап создания задачи-->
+		<dialogHostAvalonia:DialogHost
+						   Identifier="CreateTaskDialog"
+						   CloseOnClickAway="True" />
 	</Panel>
-
 
 </Window>

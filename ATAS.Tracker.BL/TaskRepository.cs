@@ -38,6 +38,14 @@ namespace ATAS.Tracker.BL
 
         }
 
+        public TaskModel CreateTask(TaskModel taskModel)
+        {
+            _dbContext.Tasks.Add(taskModel);
+            _dbContext.SaveChanges();
+            return taskModel;
+               
+        }
+
         public  List<TaskModel> GetList()
         {
             var tasks =  _dbContext.Tasks.ToList();

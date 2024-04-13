@@ -17,6 +17,7 @@ namespace ATAS.Tracker.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+
         }
     }
 }

@@ -10,5 +10,6 @@ namespace ATAS.Tracker.BL
     public interface ITaskRepository
     {
         List<TaskModel> GetList();
+        TaskModel CreateTask(TaskModel taskModel);
     }
 }
