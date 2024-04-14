@@ -12,5 +12,10 @@ namespace ATAS.Tracker.BL
     {
         List<TaskModel> GetTasks();
         void CreateTask(TaskModelDto dto);
+        TaskModelDto GetTask(int taskId);
+        void UpdateTask(int taskId, TaskModelDto dto);
+
+        void DeleteTask(int taskId);
+        
     }
 }

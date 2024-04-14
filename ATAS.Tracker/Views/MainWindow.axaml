@@ -35,9 +35,8 @@
 
 			</Grid.RowDefinitions>
 			
-			<StackPanel Grid.Row="0" Spacing="10" Orientation="Horizontal" Margin="10">
+			<StackPanel HorizontalAlignment="Center" Grid.Row="0" Spacing="10" Orientation="Horizontal" Margin="10">
 				<Button Command="{Binding OpenTaskDialogCommand}" Background="Green" Content="Добавить задачу"  />
-				<Button Command="{Binding DeleteTask}" Background="Red" Content="Удалить задачу"/>
 			</StackPanel>
 			<WrapPanel Background="Gainsboro" Width="1200" Height="800" Margin="10" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left">
 				<local:TaskListView Margin="10" DataContext="{Binding TaskListViewModel}"/>
@@ -47,6 +46,12 @@
 		
 			<!--Попап создания задачи-->
 			<dialogHostAvalonia:DialogHost  Identifier="CreateTaskDialog" CloseOnClickAway="True" />
+			
+			<!--Попап редактирования задачи-->
+			<dialogHostAvalonia:DialogHost  Identifier="EditTaskDialog" CloseOnClickAway="True" />
+			
+			<!--Попап подтверждения удаления-->
+			<dialogHostAvalonia:DialogHost  Identifier="ConfirmDeleteTaskDialog" CloseOnClickAway="True" />
 	</Panel>
 	
 

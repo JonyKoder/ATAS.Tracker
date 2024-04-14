@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reactive;
 using System.Windows.Input;
+using DialogHostAvalonia;
 using ReactiveUI;
 
 namespace ATAS.Tracker.ViewModels;
@@ -13,20 +14,41 @@ public class TaskListViewModel : ViewModelBase, INotifyPropertyChanged
 {
     private readonly ITaskService _taskService;
     public ReactiveCommand<int, Unit> EditTask { get; set; }
+    public ReactiveCommand<int, Unit> DeleteTask { get; set; }
     public ICommand EditTaskCommand { get; private set; }
 
     public TaskListViewModel(ITaskService taskService)
     {
         _taskService = taskService;
-
+        DeleteTask = ReactiveCommand.Create<int>(DeleteTaskFunc);
         EditTask = ReactiveCommand.Create<int>(EditTaskFunc);
         CreateTaskDialogViewModel.OnTaskCreated += CreateTaskDialogViewModelOnOnTaskCreated;
+        EditTaskDialogViewModel.OnTaskEdited += EditTaskDialogViewModelOnOnTaskEdited;
+        DeleteConfirmDialogViewModel.OnTaskDeleted += DeleteConfirmDialogViewModelOnOnTaskDeleted;
+        GetTasks();
+    }
+
+    private void DeleteConfirmDialogViewModelOnOnTaskDeleted(object? sender, EventArgs e)
+    {
+        GetTasks();
+        DialogHost.Close("ConfirmDeleteTaskDialog");
+    }
+
+    private void DeleteTaskFunc(int id)
+    {
+        var dialog = new DeleteConfirmDialogViewModel(_taskService, id);
+        DialogHost.Show(dialog, "ConfirmDeleteTaskDialog");
+    }
+
+    private void EditTaskDialogViewModelOnOnTaskEdited(object? sender, EventArgs e)
+    {
         GetTasks();
     }
 
     private void EditTaskFunc(int id)
     {
-        throw new NotImplementedException();
+        var dialog = new EditTaskDialogViewModel(_taskService, id);
+        DialogHost.Show(dialog, "EditTaskDialog");
     }
 
     private void CreateTaskDialogViewModelOnOnTaskCreated(object? sender, EventArgs e)

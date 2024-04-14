@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:ATAS.Tracker.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:DataType="vm:DeleteConfirmDialogViewModel"
+             x:Class="ATAS.Tracker.Views.DeleteConfirmDialogView">
+
+    <Panel Background="#E5E5E5">
+        <Panel Margin="20">
+            <StackPanel>
+                <TextBlock Text="Вы уверены, что хотите удалить этот элемент?" FontWeight="Bold" Margin="5" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Удалить" HorizontalAlignment="Left" Command="{Binding Confirm}" Background="Red" Foreground="White"
+                            Margin="5" />
+                    <Button Content="Отмена" HorizontalAlignment="Right" Background="Gray" Margin="5" />
+                </StackPanel>
+
+            </StackPanel>
+        </Panel>
+    </Panel>
+</UserControl>
