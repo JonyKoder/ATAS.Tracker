@@ -38,8 +38,14 @@
 			<StackPanel HorizontalAlignment="Center" Grid.Row="0" Spacing="10" Orientation="Horizontal" Margin="10">
 				<Button Command="{Binding OpenTaskDialogCommand}" Background="Green" Content="Добавить задачу"  />
 			</StackPanel>
-			<WrapPanel Background="Gainsboro" Width="1200" Height="800" Margin="10" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+			<StackPanel>
+				 <Button Background="Coral" Command="{Binding ChangeView}">Сменить вид</Button>
+			</StackPanel>
+			<WrapPanel IsVisible="{Binding IsVisiblePanel}" Background="Gainsboro" Width="1200" Height="800" Margin="10" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left">
 				<local:TaskListView Margin="10" DataContext="{Binding TaskListViewModel}"/>
+			</WrapPanel>
+			<WrapPanel IsVisible="{Binding IsVisibleTable}" Background="Gainsboro" Width="1200" Height="800" Margin="10" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+				<local:TaskListTableView Margin="10" DataContext="{Binding TaskListViewModel}"/>
 			</WrapPanel>
 		
 		</Grid>

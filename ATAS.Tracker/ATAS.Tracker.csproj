@@ -43,6 +43,10 @@
       <DependentUpon>DeleteConfirmDialogView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\TaskListTableView.axaml.cs">
+      <DependentUpon>TaskListTableView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
