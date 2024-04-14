@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Reactive;
 using ATAS.Tracker.BL;
 using ATAS.Tracker.EF;
@@ -16,6 +17,7 @@ namespace ATAS.Tracker.ViewModels
         public bool _isVisibleTable { get; set; } = false;
         public bool _isVisiblePanel { get; set; } = true;
         private string _description;
+
         public bool IsVisiblePanel
         {
             get => _isVisiblePanel;
@@ -37,36 +39,54 @@ namespace ATAS.Tracker.ViewModels
         }
 
         public TaskListViewModel TaskListViewModel { get; set; }
+        private readonly ITaskService _taskService;
 
         public MainWindowViewModel(TaskListViewModel taskListViewModel, ITaskService taskService)
         {
+            _taskService = taskService;
             TaskListViewModel = taskListViewModel;
             ChangeView = ReactiveCommand.Create(() =>
             {
                 IsVisiblePanel = !IsVisiblePanel;
                 IsVisibleTable = !IsVisibleTable;
             });
-
-            OpenTaskDialogCommand = ReactiveCommand.CreateFromTask( async () =>
+            Sort = ReactiveCommand.Create<int>((index) => { SortFunc(index); });
+            OpenTaskDialogCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 var dialog = new CreateTaskDialogViewModel(taskService);
                 await DialogHost.Show(dialog, "CreateTaskDialog");
             });
 
 
-            EditTask =  ReactiveCommand.Create(async () =>
-            {
-                await EditTaskAsync();
-            });
+            EditTask = ReactiveCommand.Create(async () => { await EditTaskAsync(); });
 
-            DeleteTask = ReactiveCommand.Create(async () =>
+            DeleteTask = ReactiveCommand.Create(async () => { await DeleteTaskAsync(); });
+        }
+
+        private void SortFunc(int filterNum)
+        {
+            switch (filterNum)
             {
-                await DeleteTaskAsync();
-            });
+                case 0:
+                {
+                    break;
+                }
+                case 1:
+                {
+                    TaskListViewModel.Tasks = _taskService.GetTasks().OrderBy(x => x.Title).ToList();
+                    break;
+                }
+                case 2:
+                {
+                    TaskListViewModel.Tasks = _taskService.GetTasks().OrderBy(x => x.Description).ToList();
+                    break;
+                }
+            }
         }
 
         public ReactiveCommand<Unit, Unit> OpenTaskDialogCommand { get; }
-        
+        public ReactiveCommand<int, Unit> Sort { get; set; }
+
         public ReactiveCommand<Unit, Unit> ChangeView { get; }
 
         public ICommand EditTask { get; }
@@ -81,6 +101,7 @@ namespace ATAS.Tracker.ViewModels
         {
             // Ваша логика для удаления задачи
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -88,5 +109,4 @@ namespace ATAS.Tracker.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
 }

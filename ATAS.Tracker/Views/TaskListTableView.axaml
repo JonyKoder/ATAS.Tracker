@@ -1,40 +1,39 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="using:ATAS.Tracker.ViewModels"
-             x:Class="ATAS.Tracker.Views.TaskListTableView"
+             xmlns:vm="using:ATAS.Tracker.ViewModels" x:Class="ATAS.Tracker.Views.TaskListTableView"
              x:DataType="vm:TaskListViewModel">
-
     <Panel Margin="20">
-        <ListBox Name="QuestionsListBox" Background="Transparent" FontWeight="Bold" ItemsSource="{Binding Tasks}"
-                 Margin="80,-20,0,0">
+        
+        <ListBox Name="QuestionsListBox" Background="Transparent" ItemsSource="{Binding Tasks}" Margin="80,-20,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Blue" BorderThickness="3" Margin="0,5" CornerRadius="20">
-                        <StackPanel Width="200" Margin="5">
-                            <TextBlock Text="{Binding Title}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+                        <StackPanel Width="1000" Margin="5" Background="#F0F8FF" >
+                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16" />
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="14" />
                             <StackPanel Orientation="Horizontal" Margin="0,5">
                                 <TextBlock Text="Created: " />
                                 <TextBlock Text="{Binding CreatedDate}" />
                             </StackPanel>
-                            <TextBlock Text="{Binding Status}" Foreground="{Binding Status}" />
+                            <TextBlock Text="{Binding Status}" FontSize="12" />
                             <StackPanel Orientation="Horizontal" Margin="0,5">
                                 <TextBlock Text="Completion Date: " />
                                 <TextBlock Text="{Binding CompletionDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Center" Spacing="5" Orientation="Horizontal">
-                                <Button Command="{Binding $parent[ListBox].((vm:TaskListViewModel)DataContext).EditTask}"
-                                        CommandParameter="{Binding Id}" Background="Yellow"
-                                        Content="Редактировать" FontSize="10" />
-                                <Button Command="{Binding $parent[ListBox].((vm:TaskListViewModel)DataContext).DeleteTask}"
-                                        CommandParameter="{Binding Id}" Background="Red" Foreground="White"
-                                        Content="Удалить" FontSize="10" />
+                                <Button
+                                    Command="{Binding $parent[ListBox].((vm:TaskListViewModel)DataContext).EditTask}"
+                                    CommandParameter="{Binding Id}" Background="Yellow" Content="Редактировать"
+                                    FontSize="10" />
+                                <Button
+                                    Command="{Binding $parent[ListBox].((vm:TaskListViewModel)DataContext).DeleteTask}"
+                                    CommandParameter="{Binding Id}" Background="Red" Foreground="White"
+                                    Content="Удалить" FontSize="10" />
                             </StackPanel>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" />

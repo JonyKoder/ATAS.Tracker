@@ -23,11 +23,11 @@ namespace ATAS.Tracker.BL
                     TaskModel task = new TaskModel
                     {
                         Id = i,
-                        Title = $"Task {i}",
-                        Description = $"Description for Task {i}",
+                        Title = $"Задача {i}",
+                        Description = $"Описание для задачи {i}",
                         CreatedDate = DateTime.Now,
-                        CompletionDate = DateTime.Now.AddDays(7), // Пример установки завтрашней даты
-                        Status = "Pending"
+                        CompletionDate = DateTime.Now.AddDays(7),
+                        Status = "В ожидании"
                     };
 
                     context.Tasks.Add(task);
@@ -35,6 +35,7 @@ namespace ATAS.Tracker.BL
 
                 context.SaveChanges();
             }
+
 
         }
 /// <summary>
