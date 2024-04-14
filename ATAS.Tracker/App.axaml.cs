@@ -25,14 +25,15 @@ namespace ATAS.Tracker
 
             var service = services.GetRequiredService<ITaskService>();
             var vm = services.GetRequiredService<TaskListViewModel>();
+            var createDialog = services.GetRequiredService<CreateTaskDialogViewModel>();
+
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(vm),
+                    DataContext = new MainWindowViewModel(vm, service),
                 };
-
             }
 
             base.OnFrameworkInitializationCompleted();

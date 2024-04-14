@@ -19,6 +19,7 @@ namespace ATAS.Tracker
             collection.AddDbContext<AppDbContext>();
             collection.AddSingleton<MainWindowViewModel>();
             collection.AddSingleton<TaskListViewModel>();
+            collection.AddSingleton<CreateTaskDialogViewModel>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ATAS.Tracker.BL;
+﻿using System.Reactive;
+using ATAS.Tracker.BL;
 using ATAS.Tracker.EF;
 using ATAS.Tracker.Views;
 using DialogHostAvalonia;
@@ -13,13 +14,14 @@ namespace ATAS.Tracker.ViewModels
     {
         public TaskListViewModel TaskListViewModel { get; set; }
 
-        public MainWindowViewModel(TaskListViewModel taskListViewModel)
+        public MainWindowViewModel(TaskListViewModel taskListViewModel, ITaskService taskService)
         {
             TaskListViewModel = taskListViewModel;
-            OpenTaskDialogCommand = ReactiveCommand.Create(() =>
+            
+            OpenTaskDialogCommand = ReactiveCommand.CreateFromTask( async () =>
             {
-                var dialog = new CreateTaskViewDialogViewModel();
-                DialogHost.Show(dialog, "CreateTaskDialog");
+                var dialog = new CreateTaskDialogViewModel(taskService);
+                await DialogHost.Show(dialog, "CreateTaskDialog");
             });
 
 
@@ -34,7 +36,7 @@ namespace ATAS.Tracker.ViewModels
             });
         }
 
-        public ICommand OpenTaskDialogCommand { get; }
+        public ReactiveCommand<Unit, Unit> OpenTaskDialogCommand { get; }
         public ICommand EditTask { get; }
         public ICommand DeleteTask { get; }
 

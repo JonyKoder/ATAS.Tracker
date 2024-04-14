@@ -21,6 +21,7 @@
 								<TextBlock Text="Completion Date: "/>
 								<TextBlock Text="{Binding CompletionDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
 							</StackPanel>
+							<Button Command="{Binding $parent[ListBox].((vm:TaskListViewModel)DataContext).EditTask}"  CommandParameter="{Binding Id}" Background="Yellow" Content="Редактировать задачу"/>
 						</StackPanel>
 					</Border>
 
