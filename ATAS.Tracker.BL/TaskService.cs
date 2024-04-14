@@ -58,11 +58,7 @@ namespace ATAS.Tracker.BL
         {
             _taskRepository.DeleteTask(taskId);
         }
-
-        public void Test()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public List<TaskModel> GetTasks()
         {
